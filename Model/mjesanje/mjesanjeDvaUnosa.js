@@ -1,4 +1,3 @@
-import { Entitet } from "../entitet.js"
 import { Mjesanje } from "./mjesanje.js"
 
 export class MjesanjeDvaUnosa extends Mjesanje {
@@ -15,31 +14,40 @@ export class MjesanjeDvaUnosa extends Mjesanje {
         this.#zvanjeDrugiUnos = zvanjeDrugiUnos
     }
 
-    getBodovaPrviUnos(){
+    getBodovaPrviUnos() {
         return this.#bodovaPrviUnos
     }
-    setBodovaPrviUnos(bodovaPrviUnos){
+    setBodovaPrviUnos(bodovaPrviUnos) {
         this.#bodovaPrviUnos = bodovaPrviUnos
     }
 
-    getBodovaDrugiUnos(){
+    getBodovaDrugiUnos() {
         return this.#bodovaDrugiUnos
     }
-    setBodovaDrugiUnos(bodovaDrugiUnos){
+    setBodovaDrugiUnos(bodovaDrugiUnos) {
         this.#bodovaDrugiUnos = bodovaDrugiUnos
     }
 
-    getZvanjePrviUnos(){
+    getZvanjePrviUnos() {
         return this.#zvanjePrviUnos
     }
-    setZvanjePrviUnos(zvanjePrviUnos){
+    setZvanjePrviUnos(zvanjePrviUnos) {
         this.#zvanjePrviUnos = zvanjePrviUnos
     }
 
-    getZvanjeDrugiUnos(){
+    getZvanjeDrugiUnos() {
         return this.#zvanjeDrugiUnos
     }
-    setZvanjeDrugiUnos(zvanjeDrugiUnos){
+    setZvanjeDrugiUnos(zvanjeDrugiUnos) {
         this.#zvanjeDrugiUnos = zvanjeDrugiUnos
     }
+
+    getRezultat() {
+        return {
+            prvi: this.getBodovaPrviUnos() + this.getZvanjePrviUnos(),
+            drugi: this.getBodovaDrugiUnos() + this.getZvanjeDrugiUnos(),
+            treci: 0
+        }
+    }
+
 }

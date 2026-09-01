@@ -4,23 +4,33 @@ export class MjesanjeTriUnosa extends MjesanjeDvaUnosa {
     #bodovaTreciUnos
     #zvanjeTreciUnos
 
-    constructor(id, stiglja, belot, datumUnosa, bodovaPrviUnos, bodovaDrugiUnos, zvanjePrviUnos, zvanjeDrugiUnos, bodovaTreciUnos, zvanjeTreciUnos){
+    constructor(id, stiglja, belot, datumUnosa, bodovaPrviUnos, bodovaDrugiUnos, zvanjePrviUnos, zvanjeDrugiUnos, bodovaTreciUnos, zvanjeTreciUnos) {
         super(id, stiglja, belot, datumUnosa, bodovaPrviUnos, bodovaDrugiUnos, zvanjePrviUnos, zvanjeDrugiUnos)
         this.#bodovaTreciUnos = bodovaTreciUnos
         this.#zvanjeTreciUnos = zvanjeTreciUnos
     }
 
-    getBodovaTreciUnos(){
+    getBodovaTreciUnos() {
         return this.#bodovaTreciUnos
     }
-    setBodovaTreciUnos(bodovaTreciUnos){
+    setBodovaTreciUnos(bodovaTreciUnos) {
         this.#bodovaTreciUnos = bodovaTreciUnos
     }
 
-    getZvanjeTreciUnos(){
+    getZvanjeTreciUnos() {
         return this.#zvanjeTreciUnos
     }
-    setZvanjeTreciUnos(zvanjeTreciUnos){
+    setZvanjeTreciUnos(zvanjeTreciUnos) {
         this.#zvanjeTreciUnos = zvanjeTreciUnos
+    }
+
+    getRezultat() {
+        const rezultat = super.getRezultat()
+
+        rezultat.treci =
+            this.getBodovaTreciUnos() +
+            this.getZvanjeTreciUnos()
+
+        return rezultat
     }
 }

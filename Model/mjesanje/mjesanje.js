@@ -15,6 +15,7 @@ export class Mjesanje extends Entitet {
     getStiglja() {
         return this.#stiglja
     }
+
     setStiglja(stiglja) {
         this.#stiglja = stiglja
     }
@@ -22,6 +23,7 @@ export class Mjesanje extends Entitet {
     getBelot() {
         return this.#belot
     }
+
     setBelot(belot) {
         this.#belot = belot
     }
@@ -29,8 +31,12 @@ export class Mjesanje extends Entitet {
     getDatumUnosa() {
         return this.#datumUnosa
     }
+
     setDatumUnosa(datumUnosa) {
         this.#datumUnosa = datumUnosa
+    }
 
+    getRezultat() {
+        throw new Error('Metoda getRezultat() mora biti definirana u podklasi')
     }
 }

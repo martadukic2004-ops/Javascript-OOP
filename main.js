@@ -1,55 +1,119 @@
-//TESTIRANJE mjesanje.js
-import { Entitet } from "./Model/entitet.js"
-import { Mjesanje } from "./Model/mjesanje/mjesanje.js"
-
-
-
-const m = new Mjesanje(0, false, false, "2020-02-23T18:11:30.983Z")
-console.log(m.getId())
-console.log(m.getStiglja())
-console.log(m.getBelot())
-console.log(m.getDatumUnosa())
-
-console.log(m instanceof Mjesanje)
-console.log(m instanceof Entitet)
-
-
-//TESTIRANJE mjesanjeDvaUnosa.js
-import { MjesanjeDvaUnosa } from './Model/mjesanje/mjesanjeDvaUnosa.js'
-
-const m2 = new MjesanjeDvaUnosa(0, false, true, "2020-02-23T18:11:30.983Z", 152, 10, 0, 20)
-
-console.log(m2.getBodovaPrviUnos())   
-console.log(m2.getZvanjeDrugiUnos())  
-console.log(m2 instanceof Mjesanje)
-
-
-//TESTIRANJE mjesanjeTriUnosa.js
-import { MjesanjeTriUnosa } from './Model/mjesanje/mjesanjeTriUnosa.js';
-
-const m3 = new MjesanjeTriUnosa(0, false, false, "2020-02-23T18:11:30.984Z", 10, 76, 0, 20, 76, 0);
-
-console.log(m3.getBodovaTreciUnos())
-console.log(m3.getZvanjeTreciUnos())
-console.log(m3.getBodovaPrviUnos())
-console.log(m3 instanceof MjesanjeDvaUnosa)
-
-
-//TESTIRANJE lokacija.js
-import { Lokacija } from './Model/lokacija.js'
-
-const l = new Lokacija(1, 18.6098766, 45.5605825, "Caffe Bar Peppermint")
-
-console.log(l.getId())
-console.log(l.getNaziv())
-console.log(l.getLongitude())
-console.log(l.getLatitude())
-console.log(l instanceof Entitet)
-
-//TESTIRANJE podaci.json
 import fs from 'fs'
 
-const sirovi = JSON.parse(fs.readFileSync('./podaci.json', 'utf-8'))
-console.log(sirovi.length)
-console.log(sirovi[0].lokacija.naziv)
+import { Igrac } from './Model/igrac.js'
+import { Lokacija } from './Model/lokacija.js'
 
+import { MjesanjeDvaUnosa } from './Model/mjesanje/mjesanjeDvaUnosa.js'
+import { MjesanjeTriUnosa } from './Model/mjesanje/mjesanjeTriUnosa.js'
+
+import { PartijaDvaIgraca } from './Model/partija/partijaDvaIgraca.js'
+import { PartijaTriIgraca } from './Model/partija/partijaTriIgraca.js'
+import { PartijaDvaPara } from './Model/partija/partijaDvaPara.js'
+
+const siroviPodaci = JSON.parse(
+    fs.readFileSync('./podaci.json', 'utf-8')
+)
+
+const partije = siroviPodaci.map(podatakPartije => {
+    const podatakLokacije = podatakPartije.lokacija
+
+    const lokacija = new Lokacija(
+        podatakLokacije.id,
+        podatakLokacije.longitude,
+        podatakLokacije.latitude,
+        podatakLokacije.naziv
+    )
+
+    const podatakUnosa = podatakPartije.unosi
+
+    const unosi = new Igrac(
+        podatakUnosa.id,
+        podatakUnosa.ime,
+        podatakUnosa.prezime,
+        podatakUnosa.urlSlika,
+        podatakUnosa.spol
+    )
+
+    const igraci = podatakPartije.igraci.map(podatakIgraca => {
+        return new Igrac(
+            podatakIgraca.id,
+            podatakIgraca.ime,
+            podatakIgraca.prezime,
+            podatakIgraca.urlSlika,
+            podatakIgraca.spol
+        )
+    })
+
+    let mjesanja
+
+    if (igraci.length === 3) {
+        mjesanja = podatakPartije.mjesanja.map(podatakMjesanja => {
+            return new MjesanjeTriUnosa(
+                podatakMjesanja.id,
+                podatakMjesanja.stiglja,
+                podatakMjesanja.belot,
+                podatakMjesanja.datumUnosa,
+                podatakMjesanja.bodovaPrviUnos,
+                podatakMjesanja.bodovaDrugiUnos,
+                podatakMjesanja.zvanjePrviUnos,
+                podatakMjesanja.zvanjeDrugiUnos,
+                podatakMjesanja.bodovaTreciUnos,
+                podatakMjesanja.zvanjeTreciUnos
+            )
+        })
+    } else {
+        mjesanja = podatakPartije.mjesanja.map(podatakMjesanja => {
+            return new MjesanjeDvaUnosa(
+                podatakMjesanja.id,
+                podatakMjesanja.stiglja,
+                podatakMjesanja.belot,
+                podatakMjesanja.datumUnosa,
+                podatakMjesanja.bodovaPrviUnos,
+                podatakMjesanja.bodovaDrugiUnos,
+                podatakMjesanja.zvanjePrviUnos,
+                podatakMjesanja.zvanjeDrugiUnos
+            )
+        })
+    }
+
+    if (igraci.length === 2) {
+        return new PartijaDvaIgraca(
+            podatakPartije.id,
+            podatakPartije.doKolikoSeIgra,
+            lokacija,
+            unosi,
+            mjesanja,
+            igraci
+        )
+    }
+
+    if (igraci.length === 3) {
+        return new PartijaTriIgraca(
+            podatakPartije.id,
+            podatakPartije.doKolikoSeIgra,
+            lokacija,
+            unosi,
+            mjesanja,
+            igraci
+        )
+    }
+
+    if (igraci.length === 4) {
+        return new PartijaDvaPara(
+            podatakPartije.id,
+            podatakPartije.doKolikoSeIgra,
+            lokacija,
+            unosi,
+            mjesanja,
+            igraci
+        )
+    }
+
+    throw new Error(
+        `Nepodržan broj igrača: ${igraci.length}`
+    )
+})
+
+partije.forEach(partija => {
+    console.log(partija.toString())
+})

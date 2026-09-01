@@ -1,0 +1,31 @@
+import { PartijaDvaIgraca } from './partijaDvaIgraca.js'
+
+export class PartijaTriIgraca extends PartijaDvaIgraca {
+
+    constructor(id, doKolikoSeIgra, lokacija, unosi, mjesanja, igraci) {
+        super(id, doKolikoSeIgra, lokacija, unosi, mjesanja, igraci)
+    }
+
+    getRezultat() {
+        const rezultat = super.getRezultat()
+        let treci = 0
+
+        this.getMjesanja().forEach(mjesanje => {
+            treci += mjesanje.getRezultat().treci
+        })
+
+        rezultat.treci = treci
+
+        return rezultat
+    }
+
+    toString() {
+        const rezultat = this.getRezultat()
+        const igraci = this.getIgraci()
+
+        return `Partija TRI IGRAČA, igra gotova: ${this.isIgraGotova()}, ` +
+            `${igraci[0]}: ${rezultat.prvi} | ` +
+            `${igraci[1]}: ${rezultat.drugi} | ` +
+            `${igraci[2]}: ${rezultat.treci}`
+    }
+}
