@@ -45,3 +45,11 @@ console.log(l.getNaziv())
 console.log(l.getLongitude())
 console.log(l.getLatitude())
 console.log(l instanceof Entitet)
+
+//TESTIRANJE podaci.json
+import fs from 'fs'
+
+const sirovi = JSON.parse(fs.readFileSync('./podaci.json', 'utf-8'))
+console.log(sirovi.length)
+console.log(sirovi[0].lokacija.naziv)
+
