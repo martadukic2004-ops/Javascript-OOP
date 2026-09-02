@@ -11,7 +11,7 @@ export class PartijaDvaPara extends Partija {
         const igraci = this.getIgraci()
 
         return `Partija DVA PARA, igra gotova: ${this.isIgraGotova()}, ` +
-            `${igraci[0]} i ${igraci[1]}: ${rezultat.prvi} | ` +
-            `${igraci[2]} i ${igraci[3]}: ${rezultat.drugi}`
+            `${igraci[0]} i ${igraci[1]}: ${rezultat.getPrvi()} | ` +
+            `${igraci[2]} i ${igraci[3]}: ${rezultat.getDrugi()}`
     }
 }
