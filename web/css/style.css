@@ -1,0 +1,143 @@
+body {
+    margin: 0;
+    padding: 30px 15px;
+    font-family: Arial, sans-serif;
+    background-color: whitesmoke;
+    color: black;
+}
+
+#main {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 36px;
+}
+
+h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: grey;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#igraci > div {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+}
+
+#rezultat {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+}
+
+#rezultat:empty {
+    display: none;
+}
+
+#trenutniRezultat {
+    margin-top: 25px;
+}
+
+#trenutniRezultat:not(:empty) {
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+}
+
+#trenutniRezultat h2:first-child {
+    margin-top: 0;
+}
+
+#podaciPartije {
+    display: none;
+}
+
+#unosMjesanja {
+    display: none;
+}
+
+#unosiBodova {
+    margin-top: 20px;
+}
+
+#unosiBodova h3 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid white;
+}
+
+p {
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    #main {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+}
+
+.pobjednikGif {
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    margin: 25px auto 0;
+}

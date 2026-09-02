@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bela - OOP Javascript</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div id="main">
+
+        <h1>Bela</h1>
+
+        <div id="odabirIgraca">
+
+            <label for="brojIgraca">Broj igrača</label>
+
+            <select id="brojIgraca">
+                <option value="">Odaberi broj igrača</option>
+                <option value="2">2 igrača</option>
+                <option value="3">3 igrača</option>
+                <option value="4">4 igrača</option>
+            </select>
+
+            <div id="igraci"></div>
+
+            <button id="pokreni" type="button">Pokreni</button>
+
+        </div>
+
+        <div id="rezultat"></div>
+
+        <div id="trenutniRezultat"></div>
+
+        <div id="podaciPartije">
+
+            <h2>Podaci partije</h2>
+
+            <label for="doKolikoSeIgra">Do koliko se igra?</label>
+            <input type="number" id="doKolikoSeIgra">
+
+            <label for="nazivLokacije">Naziv lokacije</label>
+            <input type="text" id="nazivLokacije">
+
+            <label for="longitude">Longitude</label>
+            <input type="number" id="longitude" step="any">
+
+            <label for="latitude">Latitude</label>
+            <input type="number" id="latitude" step="any">
+
+            <button id="nastavi">Nastavi</button>
+
+        </div>
+
+        <div id="unosMjesanja">
+
+            <h2>Novo miješanje</h2>
+
+            <label for="stiglja">Stiglja</label>
+            <select id="stiglja">
+                <option value="false">Ne</option>
+                <option value="true">Da</option>
+            </select>
+
+            <label for="belot">Belot</label>
+            <select id="belot">
+                <option value="false">Ne</option>
+                <option value="true">Da</option>
+            </select>
+
+            <div id="unosiBodova"></div>
+
+            <button id="spremiMjesanje" type="button">
+                Spremi miješanje
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="js/web.js"></script>
+
+</body>
+
+</html>
