@@ -1,4 +1,5 @@
-import { Mjesanje } from "./mjesanje.js"
+ import { Mjesanje } from "./mjesanje.js"
+ import { Rezultat } from '../rezultat.js'
 
 export class MjesanjeDvaUnosa extends Mjesanje {
     #bodovaPrviUnos
@@ -43,11 +44,9 @@ export class MjesanjeDvaUnosa extends Mjesanje {
     }
 
     getRezultat() {
-        return {
-            prvi: this.getBodovaPrviUnos() + this.getZvanjePrviUnos(),
-            drugi: this.getBodovaDrugiUnos() + this.getZvanjeDrugiUnos(),
-            treci: 0
-        }
+        return new Rezultat( 
+        this.getBodovaPrviUnos() + this.getZvanjePrviUnos(),
+        this.getBodovaDrugiUnos() + this.getZvanjeDrugiUnos(),
+    )
     }
-
 }

@@ -1,3 +1,4 @@
+import { Rezultat } from '../rezultat.js'
 import { MjesanjeDvaUnosa } from "./mjesanjeDvaUnosa.js"
 
 export class MjesanjeTriUnosa extends MjesanjeDvaUnosa {
@@ -24,13 +25,11 @@ export class MjesanjeTriUnosa extends MjesanjeDvaUnosa {
         this.#zvanjeTreciUnos = zvanjeTreciUnos
     }
 
-    getRezultat() {
-        const rezultat = super.getRezultat()
-
-        rezultat.treci =
-            this.getBodovaTreciUnos() +
-            this.getZvanjeTreciUnos()
-
-        return rezultat
-    }
+   getRezultat() {
+    return new Rezultat(
+        this.getBodovaPrviUnos() + this.getZvanjePrviUnos(),
+        this.getBodovaDrugiUnos() + this.getZvanjeDrugiUnos(),
+        this.getBodovaTreciUnos() + this.getZvanjeTreciUnos()
+    )
+}
 }
