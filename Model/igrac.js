@@ -1,4 +1,5 @@
 import { Entitet } from './entitet.js'
+import { Spol } from './spol.js'
 
 export class Igrac extends Entitet {
     #ime
@@ -44,6 +45,10 @@ export class Igrac extends Entitet {
 
     setSpol(spol) {
         this.#spol = spol
+    }
+
+    getSpolNaziv() {
+        return this.getSpol() === Spol.MUSKI ? 'Muško' : 'Žensko'
     }
 
     toString() {
