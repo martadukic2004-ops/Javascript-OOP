@@ -6,19 +6,6 @@ export class PartijaTriIgraca extends PartijaDvaIgraca {
         super(id, doKolikoSeIgra, lokacija, unosi, mjesanja, igraci)
     }
 
-    getRezultat() {
-        const rezultat = super.getRezultat()
-        let treci = 0
-
-        this.getMjesanja().forEach(mjesanje => {
-            treci += mjesanje.getRezultat().treci
-        })
-
-        rezultat.treci = treci
-
-        return rezultat
-    }
-
     toString() {
         const rezultat = this.getRezultat()
         const igraci = this.getIgraci()

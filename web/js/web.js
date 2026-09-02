@@ -428,8 +428,8 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.prvi >
-                trenutniRezultat.drugi
+                trenutniRezultat.getPrvi() >
+                trenutniRezultat.getDrugi()
             ) {
 
                 pobjednik = uneseniIgraci[0]
@@ -438,8 +438,8 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.drugi >
-                trenutniRezultat.prvi
+                trenutniRezultat.getDrugi() >
+                trenutniRezultat.getPrvi()
             ) {
 
                 pobjednik = uneseniIgraci[1]
@@ -448,26 +448,26 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             trenutniRezultatPrikaz.innerHTML = `
-            <h2>Finalni rezultat</h2>
+                <h2>Finalni rezultat</h2>
 
-    <p>
-        ${uneseniIgraci[0].toString()}:
-        ${trenutniRezultat.prvi}
-    </p>
+                <p>
+                    ${uneseniIgraci[0].toString()}:
+                    ${trenutniRezultat.getPrvi()}
+                </p>
 
-    <p>
-        ${uneseniIgraci[1].toString()}:
-        ${trenutniRezultat.drugi}
-    </p>
+                <p>
+                    ${uneseniIgraci[1].toString()}:
+                    ${trenutniRezultat.getDrugi()}
+                </p>
 
-    <h2>Partija je gotova!</h2>
+                <h2>Partija je gotova!</h2>
 
-    <p>
-        Pobjednik je ${pobjednik.toString()}
-    </p>
+                <p>
+                    Pobjednik je ${pobjednik.toString()}
+                </p>
 
-    <img src="img/pobjednik.gif" class="pobjednikGif" alt="Pobjednik">
-`
+                <img src="img/pobjednik.gif" class="pobjednikGif" alt="Pobjednik">
+            `
 
 
             unosMjesanja.style.display = 'none'
@@ -486,10 +486,10 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.prvi >
-                trenutniRezultat.drugi &&
-                trenutniRezultat.prvi >
-                trenutniRezultat.treci
+                trenutniRezultat.getPrvi() >
+                trenutniRezultat.getDrugi() &&
+                trenutniRezultat.getPrvi() >
+                trenutniRezultat.getTreci()
             ) {
 
                 pobjednik = uneseniIgraci[0]
@@ -498,10 +498,10 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.drugi >
-                trenutniRezultat.prvi &&
-                trenutniRezultat.drugi >
-                trenutniRezultat.treci
+                trenutniRezultat.getDrugi() >
+                trenutniRezultat.getPrvi() &&
+                trenutniRezultat.getDrugi() >
+                trenutniRezultat.getTreci()
             ) {
 
                 pobjednik = uneseniIgraci[1]
@@ -510,10 +510,10 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.treci >
-                trenutniRezultat.prvi &&
-                trenutniRezultat.treci >
-                trenutniRezultat.drugi
+                trenutniRezultat.getTreci() >
+                trenutniRezultat.getPrvi() &&
+                trenutniRezultat.getTreci() >
+                trenutniRezultat.getDrugi()
             ) {
 
                 pobjednik = uneseniIgraci[2]
@@ -526,17 +526,17 @@ spremiMjesanje.addEventListener('click', () => {
 
                 <p>
                     ${uneseniIgraci[0].toString()}:
-                    ${trenutniRezultat.prvi}
+                    ${trenutniRezultat.getPrvi()}
                 </p>
 
                 <p>
                     ${uneseniIgraci[1].toString()}:
-                    ${trenutniRezultat.drugi}
+                    ${trenutniRezultat.getDrugi()}
                 </p>
 
                 <p>
                     ${uneseniIgraci[2].toString()}:
-                    ${trenutniRezultat.treci}
+                    ${trenutniRezultat.getTreci()}
                 </p>
 
                 <h2>Partija je gotova!</h2>
@@ -565,8 +565,8 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.prvi >
-                trenutniRezultat.drugi
+                trenutniRezultat.getPrvi() >
+                trenutniRezultat.getDrugi()
             ) {
 
                 pobjednici = `
@@ -578,8 +578,8 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             if (
-                trenutniRezultat.drugi >
-                trenutniRezultat.prvi
+                trenutniRezultat.getDrugi() >
+                trenutniRezultat.getPrvi()
             ) {
 
                 pobjednici = `
@@ -596,13 +596,13 @@ spremiMjesanje.addEventListener('click', () => {
                 <p>
                     ${uneseniIgraci[0].toString()} i
                     ${uneseniIgraci[1].toString()}:
-                    ${trenutniRezultat.prvi}
+                    ${trenutniRezultat.getPrvi()}
                 </p>
 
                 <p>
                     ${uneseniIgraci[2].toString()} i
                     ${uneseniIgraci[3].toString()}:
-                    ${trenutniRezultat.drugi}
+                    ${trenutniRezultat.getDrugi()}
                 </p>
 
                 <h2>Partija je gotova!</h2>
@@ -634,12 +634,12 @@ spremiMjesanje.addEventListener('click', () => {
 
             <p>
                 ${uneseniIgraci[0].toString()}:
-                ${trenutniRezultat.prvi}
+                ${trenutniRezultat.getPrvi()}
             </p>
 
             <p>
                 ${uneseniIgraci[1].toString()}:
-                ${trenutniRezultat.drugi}
+                ${trenutniRezultat.getDrugi()}
             </p>
         `
 
@@ -655,17 +655,17 @@ spremiMjesanje.addEventListener('click', () => {
 
             <p>
                 ${uneseniIgraci[0].toString()}:
-                ${trenutniRezultat.prvi}
+                ${trenutniRezultat.getPrvi()}
             </p>
 
             <p>
                 ${uneseniIgraci[1].toString()}:
-                ${trenutniRezultat.drugi}
+                ${trenutniRezultat.getDrugi()}
             </p>
 
             <p>
                 ${uneseniIgraci[2].toString()}:
-                ${trenutniRezultat.treci}
+                ${trenutniRezultat.getTreci()}
             </p>
         `
 
@@ -682,13 +682,13 @@ spremiMjesanje.addEventListener('click', () => {
             <p>
                 ${uneseniIgraci[0].toString()} i
                 ${uneseniIgraci[1].toString()}:
-                ${trenutniRezultat.prvi}
+                ${trenutniRezultat.getPrvi()}
             </p>
 
             <p>
                 ${uneseniIgraci[2].toString()} i
                 ${uneseniIgraci[3].toString()}:
-                ${trenutniRezultat.drugi}
+                ${trenutniRezultat.getDrugi()}
             </p>
         `
 
@@ -718,5 +718,13 @@ spremiMjesanje.addEventListener('click', () => {
     stiglja.value = 'false'
 
     belot.value = 'false'
+
+})
+
+document.addEventListener('wheel', (event) => {
+
+    if (document.activeElement.type === 'number') {
+        document.activeElement.blur()
+    }
 
 })
