@@ -1,4 +1,5 @@
 import { Entitet } from '../entitet.js'
+import { Rezultat } from '../rezultat.js'
 
 export class Partija extends Entitet {
     #doKolikoSeIgra
@@ -54,53 +55,51 @@ export class Partija extends Entitet {
     getRezultat() {
         let prvi = 0
         let drugi = 0
+        let treci = 0
 
         this.getMjesanja().forEach(mjesanje => {
             const rezultatMjesanja = mjesanje.getRezultat()
 
-            prvi += rezultatMjesanja.prvi
-            drugi += rezultatMjesanja.drugi
+            prvi += rezultatMjesanja.getPrvi()
+            drugi += rezultatMjesanja.getDrugi()
+            treci += rezultatMjesanja.getTreci()
         })
 
-        return {
-            prvi: prvi,
-            drugi: drugi,
-            treci: 0
-        }
+        return new Rezultat(prvi, drugi, treci)
     }
 
-    isIgraGotova() {
+        isIgraGotova() {
         const rezultat = this.getRezultat()
 
         const igraNijePocela =
-            rezultat.prvi === 0 &&
-            rezultat.drugi === 0 &&
-            rezultat.treci === 0
+            rezultat.getPrvi() === 0 &&
+            rezultat.getDrugi() === 0 &&
+            rezultat.getTreci() === 0
 
         if (igraNijePocela) {
             return false
         }
 
-        if (rezultat.treci === 0) {
-            if (rezultat.prvi === rezultat.drugi) {
+        if (rezultat.getTreci() === 0) {
+            if (rezultat.getPrvi() === rezultat.getDrugi()) {
                 return false
             }
 
-            return rezultat.prvi > this.getDoKolikoSeIgra() ||
-                rezultat.drugi > this.getDoKolikoSeIgra()
+            return rezultat.getPrvi() > this.getDoKolikoSeIgra() ||
+                rezultat.getDrugi() > this.getDoKolikoSeIgra()
         }
 
         const postojiIzjednacenje =
-            rezultat.prvi === rezultat.drugi ||
-            rezultat.prvi === rezultat.treci ||
-            rezultat.drugi === rezultat.treci
+            rezultat.getPrvi() === rezultat.getDrugi() ||
+            rezultat.getPrvi() === rezultat.getTreci() ||
+            rezultat.getDrugi() === rezultat.getTreci()
 
         if (postojiIzjednacenje) {
             return false
         }
 
-        return rezultat.prvi > this.getDoKolikoSeIgra() ||
-            rezultat.drugi > this.getDoKolikoSeIgra() ||
-            rezultat.treci > this.getDoKolikoSeIgra()
+        return rezultat.getPrvi() > this.getDoKolikoSeIgra() ||
+            rezultat.getDrugi() > this.getDoKolikoSeIgra() ||
+            rezultat.getTreci() > this.getDoKolikoSeIgra()
     }
 }

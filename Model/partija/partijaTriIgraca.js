@@ -24,8 +24,8 @@ export class PartijaTriIgraca extends PartijaDvaIgraca {
         const igraci = this.getIgraci()
 
         return `Partija TRI IGRAČA, igra gotova: ${this.isIgraGotova()}, ` +
-            `${igraci[0]}: ${rezultat.prvi} | ` +
-            `${igraci[1]}: ${rezultat.drugi} | ` +
-            `${igraci[2]}: ${rezultat.treci}`
+            `${igraci[0]}: ${rezultat.getPrvi()} | ` +
+            `${igraci[1]}: ${rezultat.getDrugi()} | ` +
+            `${igraci[2]}: ${rezultat.getTreci()}`
     }
 }
