@@ -4,12 +4,14 @@ export class Mjesanje extends Entitet {
     #stiglja
     #belot
     #datumUnosa
+    #zvaoAdut = Number(zvaoAdut)
 
     constructor(id, stiglja, belot, datumUnosa) {
         super(id)
         this.#stiglja = stiglja
         this.#belot = belot
         this.#datumUnosa = datumUnosa
+        this.#zvaoAdut = Number(zvaoAdut)
     }
 
     getStiglja() {
@@ -34,6 +36,14 @@ export class Mjesanje extends Entitet {
 
     setDatumUnosa(datumUnosa) {
         this.#datumUnosa = datumUnosa
+    }
+
+    getZvaoAdut() {
+        return this.#zvaoAdut
+    }
+
+    setZvaoAdut(zvaoAdut) {
+        this.#zvaoAdut = Number(zvaoAdut)
     }
 
     getRezultat() {
