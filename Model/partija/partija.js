@@ -99,6 +99,10 @@ export class Partija extends Entitet {
         if (!this.isIgraGotova()) {
             return null
         }
+        const belotMjesanje = this.getMjesanja().find(mjesanje => mjesanje.getBelot())
+        if (belotMjesanje) {
+            return belotMjesanje.getZvaoAdut() - 1
+        }
 
         const rez = this.getRezultat()
         const bodovi = this.getIgraci().length === 3
