@@ -54,15 +54,21 @@ export class MjesanjeTriUnosa extends MjesanjeDvaUnosa {
             rez[jeZvaoIdx] = ukupnoStihovi + 90 + ukupnoZvanja
             return new Rezultat(rez[0], rez[1], rez[2])
         }
-        if (bodovi[jeZvaoIdx] === 0 && nulaBodova.length >= 2) {
-            const pobjednikObraneIdx = nisuZvali.find(i => bodovi[i] > 0)
-            if (pobjednikObraneIdx !== undefined) {
-                rez[pobjednikObraneIdx] = ukupnoStihovi + 90 + ukupnoZvanja
-            } else {
-                this.#podijeliObrana(rez, nisuZvali1Idx, nisuZvali2Idx, bodovi, ukupnoStihovi + 90 + ukupnoZvanja)
-            }
-            return new Rezultat(rez[0], rez[1], rez[2])
-        }
+        if (bodovi[jeZvaoIdx] === 0 &&
+    nulaBodova.length >= 2) {
+    this.#podijeliObrana(
+        rez,
+        nisuZvali1Idx,
+        nisuZvali2Idx,
+        bodovi,
+        ukupnoStihovi + 90 + ukupnoZvanja
+    )
+    return new Rezultat(
+        rez[0],
+        rez[1],
+        rez[2]
+    )
+}
         if (nulaBodova.length === 1 && bodovi[jeZvaoIdx] > 0) {
             const nulaIdx = nulaBodova[0]
             const dobarObranaIdx = nisuZvali.find(i => i !== nulaIdx)
