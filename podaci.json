@@ -23,6 +23,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.983Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -33,6 +34,7 @@
         "stiglja": true,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.983Z",
+        "zvaoAdutUnos": 1,
         "id": 0
       }
     ],
@@ -80,6 +82,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -92,6 +95,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -104,6 +108,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -116,6 +121,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -128,6 +134,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -140,6 +147,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       }
     ],
@@ -192,6 +200,7 @@
         "stiglja": false,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 2, 
         "id": 0
       },
       {
@@ -202,6 +211,7 @@
         "stiglja": true,
         "belot": false,
         "datumUnosa": "2020-02-23T18:11:30.984Z",
+        "zvaoAdutUnos": 1, 
         "id": 0
       }
     ],
