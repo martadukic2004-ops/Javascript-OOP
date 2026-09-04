@@ -9,38 +9,38 @@ export class MjesanjeDvaUnosa extends Mjesanje {
 
     constructor(id, stiglja, belot, datumUnosa, zvaoAdut, bodovaPrviUnos, bodovaDrugiUnos, zvanjePrviUnos, zvanjeDrugiUnos) {
         super(id, stiglja, belot, datumUnosa, zvaoAdut)
-        this.#bodovaPrviUnos = bodovaPrviUnos
-        this.#bodovaDrugiUnos = bodovaDrugiUnos
-        this.#zvanjePrviUnos = zvanjePrviUnos
-        this.#zvanjeDrugiUnos = zvanjeDrugiUnos
+        this.#bodovaPrviUnos = Number (bodovaPrviUnos)
+        this.#bodovaDrugiUnos = Number (bodovaDrugiUnos)
+        this.#zvanjePrviUnos = Number (zvanjePrviUnos)
+        this.#zvanjeDrugiUnos = Number (zvanjeDrugiUnos)
     }
 
     getBodovaPrviUnos() {
         return this.#bodovaPrviUnos
     }
     setBodovaPrviUnos(bodovaPrviUnos) {
-        this.#bodovaPrviUnos = bodovaPrviUnos
+        this.#bodovaPrviUnos = Number (bodovaPrviUnos)
     }
 
     getBodovaDrugiUnos() {
         return this.#bodovaDrugiUnos
     }
     setBodovaDrugiUnos(bodovaDrugiUnos) {
-        this.#bodovaDrugiUnos = bodovaDrugiUnos
+        this.#bodovaDrugiUnos = Number (bodovaDrugiUnos)
     }
 
     getZvanjePrviUnos() {
         return this.#zvanjePrviUnos
     }
     setZvanjePrviUnos(zvanjePrviUnos) {
-        this.#zvanjePrviUnos = zvanjePrviUnos
+        this.#zvanjePrviUnos = Number (zvanjePrviUnos)
     }
 
     getZvanjeDrugiUnos() {
         return this.#zvanjeDrugiUnos
     }
     setZvanjeDrugiUnos(zvanjeDrugiUnos) {
-        this.#zvanjeDrugiUnos = zvanjeDrugiUnos
+        this.#zvanjeDrugiUnos = Number (zvanjeDrugiUnos)
     }
 
     getRezultat() {
