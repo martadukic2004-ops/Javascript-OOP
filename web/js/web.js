@@ -35,6 +35,7 @@ const spremiMjesanje = document.getElementById('spremiMjesanje')
 
 const stiglja = document.getElementById('stiglja')
 const belot = document.getElementById('belot')
+const zvaoAdut = document.getElementById('zvaoAdut')
 
 
 let uneseniIgraci = []
@@ -90,13 +91,9 @@ pokreni.addEventListener('click', () => {
     for (let i = 1; i <= broj; i++) {
 
         const ime = document.getElementById('ime' + i).value
-
         const prezime = document.getElementById('prezime' + i).value
-
         const urlSlika = document.getElementById('urlSlika' + i).value
-
         const spol = document.getElementById('spol' + i).value
-
 
         const igrac = new Igrac(
             i,
@@ -138,9 +135,7 @@ pokreni.addEventListener('click', () => {
 nastavi.addEventListener('click', () => {
 
     const naziv = nazivLokacije.value
-
     const longitudeBroj = Number(longitude.value)
-
     const latitudeBroj = Number(latitude.value)
 
 
@@ -154,11 +149,40 @@ nastavi.addEventListener('click', () => {
 
     const broj = uneseniIgraci.length
 
+    zvaoAdut.innerHTML = ''
+
+    if (broj === 2 || broj === 3) {
+
+        uneseniIgraci.forEach((igrac, index) => {
+
+            zvaoAdut.innerHTML += `
+            <option value="${index + 1}">
+                ${igrac.toString()}
+            </option>
+        `
+
+        })
+
+    }
+
+    if (broj === 4) {
+
+        zvaoAdut.innerHTML = `
+        <option value="1">
+            ${uneseniIgraci[0].toString()} i
+            ${uneseniIgraci[1].toString()}
+        </option>
+
+        <option value="2">
+            ${uneseniIgraci[2].toString()} i
+            ${uneseniIgraci[3].toString()}
+        </option>
+    `
+
+    }
+
     const cilj = Number(doKolikoSeIgra.value)
-
-
     const unosi = []
-
     const mjesanja = []
 
 
@@ -329,31 +353,21 @@ spremiMjesanje.addEventListener('click', () => {
     const bodoviPrvi = Number(
         document.getElementById('bodoviPrvi').value
     )
-
     const zvanjePrvi = Number(
         document.getElementById('zvanjePrvi').value
     )
-
-
     const bodoviDrugi = Number(
         document.getElementById('bodoviDrugi').value
     )
-
     const zvanjeDrugi = Number(
         document.getElementById('zvanjeDrugi').value
     )
-
-
     const imaStiglju = stiglja.value === 'true'
-
     const imaBelot = belot.value === 'true'
-
-
+    const zvaoJe = Number(zvaoAdut.value)
     const idMjesanja = partija.getMjesanja().length + 1
 
-
     let mjesanje
-
 
     // Miješanje za 2 ili 4 igrača
 
@@ -367,6 +381,7 @@ spremiMjesanje.addEventListener('click', () => {
             imaStiglju,
             imaBelot,
             new Date(),
+            zvaoJe,
             bodoviPrvi,
             bodoviDrugi,
             zvanjePrvi,
@@ -374,7 +389,6 @@ spremiMjesanje.addEventListener('click', () => {
         )
 
     }
-
 
     // Miješanje za 3 igrača
 
@@ -394,6 +408,7 @@ spremiMjesanje.addEventListener('click', () => {
             imaStiglju,
             imaBelot,
             new Date(),
+            zvaoJe, 
             bodoviPrvi,
             bodoviDrugi,
             zvanjePrvi,
