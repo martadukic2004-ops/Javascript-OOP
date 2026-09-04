@@ -434,33 +434,13 @@ spremiMjesanje.addEventListener('click', () => {
 
     if (partija.isIgraGotova()) {
 
+        const pobjednikIndex = partija.getPobjednikIndex()
 
         // Kraj partije za 2 igrača
 
         if (uneseniIgraci.length === 2) {
 
-            let pobjednik
-
-
-            if (
-                trenutniRezultat.getPrvi() >
-                trenutniRezultat.getDrugi()
-            ) {
-
-                pobjednik = uneseniIgraci[0]
-
-            }
-
-
-            if (
-                trenutniRezultat.getDrugi() >
-                trenutniRezultat.getPrvi()
-            ) {
-
-                pobjednik = uneseniIgraci[1]
-
-            }
-
+            const pobjednik = uneseniIgraci[pobjednikIndex]
 
             trenutniRezultatPrikaz.innerHTML = `
                 <h2>Finalni rezultat</h2>
@@ -497,44 +477,7 @@ spremiMjesanje.addEventListener('click', () => {
 
         if (uneseniIgraci.length === 3) {
 
-            let pobjednik
-
-
-            if (
-                trenutniRezultat.getPrvi() >
-                trenutniRezultat.getDrugi() &&
-                trenutniRezultat.getPrvi() >
-                trenutniRezultat.getTreci()
-            ) {
-
-                pobjednik = uneseniIgraci[0]
-
-            }
-
-
-            if (
-                trenutniRezultat.getDrugi() >
-                trenutniRezultat.getPrvi() &&
-                trenutniRezultat.getDrugi() >
-                trenutniRezultat.getTreci()
-            ) {
-
-                pobjednik = uneseniIgraci[1]
-
-            }
-
-
-            if (
-                trenutniRezultat.getTreci() >
-                trenutniRezultat.getPrvi() &&
-                trenutniRezultat.getTreci() >
-                trenutniRezultat.getDrugi()
-            ) {
-
-                pobjednik = uneseniIgraci[2]
-
-            }
-
+            const pobjednik = uneseniIgraci[pobjednikIndex]
 
             trenutniRezultatPrikaz.innerHTML = `
                 <h2>Finalni rezultat</h2>
@@ -576,34 +519,14 @@ spremiMjesanje.addEventListener('click', () => {
 
         if (uneseniIgraci.length === 4) {
 
-            let pobjednici
+            const prviIgracPara = pobjednikIndex === 0 ? 0 : 2
+            const drugiIgracPara = prviIgracPara + 1
 
-
-            if (
-                trenutniRezultat.getPrvi() >
-                trenutniRezultat.getDrugi()
-            ) {
-
-                pobjednici = `
-                    ${uneseniIgraci[0].toString()} i
-                    ${uneseniIgraci[1].toString()}
-                `
-
-            }
-
-
-            if (
-                trenutniRezultat.getDrugi() >
-                trenutniRezultat.getPrvi()
-            ) {
-
-                pobjednici = `
-                    ${uneseniIgraci[2].toString()} i
-                    ${uneseniIgraci[3].toString()}
-                `
-
-            }
-
+            const pobjednici = `
+            ${uneseniIgraci[prviIgracPara].toString()} i 
+            ${uneseniIgraci[drugiIgracPara].toString()}
+            `
+            
 
             trenutniRezultatPrikaz.innerHTML = `
                 <h2>Finalni rezultat</h2>
