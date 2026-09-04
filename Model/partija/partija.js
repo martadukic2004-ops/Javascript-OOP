@@ -45,11 +45,15 @@ export class Partija extends Entitet {
         this.#mjesanja = mjesanja
     }
 
+    dodajMjesanje(mjesanje) {
+        this.#mjesanja.push(mjesanje)
+    }
+
     getIgraci() {
         return this.#igraci
     }
     setIgraci(igraci) {
-        this.#igraci = igraci
+        this.#igraci = Array.isArray(igraci) ? igraci : []
     }
 
     getRezultat() {
@@ -68,38 +72,39 @@ export class Partija extends Entitet {
         return new Rezultat(prvi, drugi, treci)
     }
 
-        isIgraGotova() {
-        const rezultat = this.getRezultat()
+    isIgraGotova() {
+        const imaBelot = this.getMjesanja().some(mjesanje => mjesanje.getBelot())
+        if (imaBelot) {
+            return true
+        }
 
-        const igraNijePocela =
-            rezultat.getPrvi() === 0 &&
-            rezultat.getDrugi() === 0 &&
-            rezultat.getTreci() === 0
+        const rez = this.getRezultat()
+        const granica = this.getDoKolikoSeIgra()
+        const bodovi = this.getIgraci().length === 3
+            ? [rez.getPrvi(), rez.getDrugi(), rez.getTreci()]
+            : [rez.getPrvi(), rez.getDrugi()]
+        const maxBodovi = Math.max(...bodovi)
 
-        if (igraNijePocela) {
+        if (maxBodovi < granica) {
             return false
         }
+        const brojVodecih = bodovi.filter(b => b === maxBodovi).length
+        if (brojVodecih > 1) {
+            return false 
+                }
 
-        if (rezultat.getTreci() === 0) {
-            if (rezultat.getPrvi() === rezultat.getDrugi()) {
-                return false
-            }
-
-            return rezultat.getPrvi() > this.getDoKolikoSeIgra() ||
-                rezultat.getDrugi() > this.getDoKolikoSeIgra()
+        return true
+    }
+    getPobjednikIndex() {
+        if (!this.isIgraGotova()) {
+            return null
         }
 
-        const postojiIzjednacenje =
-            rezultat.getPrvi() === rezultat.getDrugi() ||
-            rezultat.getPrvi() === rezultat.getTreci() ||
-            rezultat.getDrugi() === rezultat.getTreci()
-
-        if (postojiIzjednacenje) {
-            return false
-        }
-
-        return rezultat.getPrvi() > this.getDoKolikoSeIgra() ||
-            rezultat.getDrugi() > this.getDoKolikoSeIgra() ||
-            rezultat.getTreci() > this.getDoKolikoSeIgra()
+        const rez = this.getRezultat()
+        const bodovi = this.getIgraci().length === 3
+            ? [rez.getPrvi(), rez.getDrugi(), rez.getTreci()]
+            : [rez.getPrvi(), rez.getDrugi()]
+        const maxBodovi = Math.max(...bodovi)
+        return bodovi.indexOf(maxBodovi)
     }
 }
