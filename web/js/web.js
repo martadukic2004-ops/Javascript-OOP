@@ -32,6 +32,7 @@ const nazivLokacije = document.getElementById('nazivLokacije')
 const unosMjesanja = document.getElementById('unosMjesanja')
 const unosiBodova = document.getElementById('unosiBodova')
 const spremiMjesanje = document.getElementById('spremiMjesanje')
+const novaPartija = document.getElementById('novaPartija')
 
 const stiglja = document.getElementById('stiglja')
 const belot = document.getElementById('belot')
@@ -408,7 +409,7 @@ spremiMjesanje.addEventListener('click', () => {
             imaStiglju,
             imaBelot,
             new Date(),
-            zvaoJe, 
+            zvaoJe,
             bodoviPrvi,
             bodoviDrugi,
             zvanjePrvi,
@@ -466,7 +467,7 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             unosMjesanja.style.display = 'none'
-
+            novaPartija.style.display = 'block'
 
             return
 
@@ -508,7 +509,7 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             unosMjesanja.style.display = 'none'
-
+            novaPartija.style.display = 'block'
 
             return
 
@@ -526,7 +527,7 @@ spremiMjesanje.addEventListener('click', () => {
             ${uneseniIgraci[prviIgracPara].toString()} i 
             ${uneseniIgraci[drugiIgracPara].toString()}
             `
-            
+
 
             trenutniRezultatPrikaz.innerHTML = `
                 <h2>Finalni rezultat</h2>
@@ -554,7 +555,7 @@ spremiMjesanje.addEventListener('click', () => {
 
 
             unosMjesanja.style.display = 'none'
-
+            novaPartija.style.display = 'block'
 
             return
 
@@ -659,10 +660,14 @@ spremiMjesanje.addEventListener('click', () => {
 
 })
 
+
 document.addEventListener('wheel', (event) => {
 
     if (document.activeElement.type === 'number') {
         document.activeElement.blur()
     }
+})
 
+novaPartija.addEventListener('click', () => {
+    window.location.reload()
 })
