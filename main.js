@@ -118,4 +118,28 @@ const partije = siroviPodaci.map(podatakPartije => {
 
 partije.forEach(partija => {
     console.log(partija.toString())
+
+    if (!partija.isIgraGotova()) {
+        return
+    }
+
+    const pobjednikIndex = partija.getPobjednikIndex()
+    const igraci = partija.getIgraci()
+
+    if (igraci.length === 2 || igraci.length === 3) {
+        console.log(
+            `Pobjednik je ${igraci[pobjednikIndex].toString()}`
+        )
+    }
+
+    if (igraci.length === 4) {
+        const prviIgracPara = pobjednikIndex === 0 ? 0 : 2
+        const drugiIgracPara = prviIgracPara + 1
+
+        console.log(
+            `Pobjednici su ` +
+            `${igraci[prviIgracPara].toString()} i ` +
+            `${igraci[drugiIgracPara].toString()}`
+        )
+    }
 })
