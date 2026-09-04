@@ -1,9 +1,7 @@
 // WEB verzija aplikacije Bela
 // Povezuje HTML sučelje s postojećim OOP klasama iz Model foldera
 
-
 // Uvoz klasa
-
 import { Igrac } from '../../Model/igrac.js'
 import { Lokacija } from '../../Model/lokacija.js'
 import { PartijaDvaIgraca } from '../../Model/partija/partijaDvaIgraca.js'
@@ -12,48 +10,37 @@ import { PartijaDvaPara } from '../../Model/partija/partijaDvaPara.js'
 import { MjesanjeDvaUnosa } from '../../Model/mjesanje/mjesanjeDvaUnosa.js'
 import { MjesanjeTriUnosa } from '../../Model/mjesanje/mjesanjeTriUnosa.js'
 
-
 const brojIgraca = document.getElementById('brojIgraca')
 const igraci = document.getElementById('igraci')
-
 const pokreni = document.getElementById('pokreni')
 const rezultat = document.getElementById('rezultat')
 const trenutniRezultatPrikaz = document.getElementById('trenutniRezultat')
 const odabirIgraca = document.getElementById('odabirIgraca')
-
 const podaciPartije = document.getElementById('podaciPartije')
 const doKolikoSeIgra = document.getElementById('doKolikoSeIgra')
 const nastavi = document.getElementById('nastavi')
-
 const longitude = document.getElementById('longitude')
 const latitude = document.getElementById('latitude')
 const nazivLokacije = document.getElementById('nazivLokacije')
-
 const unosMjesanja = document.getElementById('unosMjesanja')
 const unosiBodova = document.getElementById('unosiBodova')
 const spremiMjesanje = document.getElementById('spremiMjesanje')
 const novaPartija = document.getElementById('novaPartija')
-
 const stiglja = document.getElementById('stiglja')
 const belot = document.getElementById('belot')
 const zvaoAdut = document.getElementById('zvaoAdut')
-
 
 let uneseniIgraci = []
 let lokacija
 let partija
 
-
 // Kreiranje polja za unos igrača prema odabranom broju igrača
-
 brojIgraca.addEventListener('change', () => {
-
     igraci.innerHTML = ''
 
     const broj = Number(brojIgraca.value)
 
     for (let i = 1; i <= broj; i++) {
-
         igraci.innerHTML += `
             <div>
                 <h3>Igrač ${i}</h3>
@@ -75,21 +62,16 @@ brojIgraca.addEventListener('change', () => {
                 </select>
             </div>
         `
-
     }
-
 })
 
-
 // Kreiranje Igrac objekata iz podataka unesenih u HTML formu
-
 pokreni.addEventListener('click', () => {
-
     const broj = Number(brojIgraca.value)
 
     if (broj !== 2 && broj !== 3 && broj !== 4) {
         rezultat.innerHTML = `
-        <p>Odaberi broj igrača.</p>
+            <p>Odaberi broj igrača.</p>
         `
         return
     }
@@ -97,7 +79,6 @@ pokreni.addEventListener('click', () => {
     uneseniIgraci = []
 
     for (let i = 1; i <= broj; i++) {
-
         const ime = document.getElementById('ime' + i).value
         const prezime = document.getElementById('prezime' + i).value
         const urlSlika = document.getElementById('urlSlika' + i).value
@@ -105,22 +86,22 @@ pokreni.addEventListener('click', () => {
 
         if (ime.trim() === '') {
             rezultat.innerHTML = `
-        <p>Unesi ime igrača ${i}.</p>
-    `
+                <p>Unesi ime igrača ${i}.</p>
+            `
             return
         }
 
         if (prezime.trim() === '') {
             rezultat.innerHTML = `
-        <p>Unesi prezime igrača ${i}.</p>
-    `
+                <p>Unesi prezime igrača ${i}.</p>
+            `
             return
         }
 
         if (spol === '') {
             rezultat.innerHTML = `
-        <p>Odaberi spol igrača ${i}.</p>
-    `
+                <p>Odaberi spol igrača ${i}.</p>
+            `
             return
         }
 
@@ -132,38 +113,25 @@ pokreni.addEventListener('click', () => {
             spol
         )
 
-
         uneseniIgraci.push(igrac)
-
     }
 
-
     // Ispis igrača na web stranici
-
     rezultat.innerHTML = '<h2>Uneseni igrači</h2>'
 
-
     uneseniIgraci.forEach(igrac => {
-
         rezultat.innerHTML += `
             <p>${igrac.toString()}</p>
         `
-
     })
 
-
     odabirIgraca.style.display = 'none'
-
     podaciPartije.style.display = 'block'
-
 })
 
-
 // Kreiranje partije
-
 nastavi.addEventListener('click', () => {
-
-    const naziv = nazivLokacije.value
+    const naziv = nazivLokacije.value.trim()
     const cilj = Number(doKolikoSeIgra.value)
     const longitudeBroj = Number(longitude.value)
     const latitudeBroj = Number(latitude.value)
@@ -192,49 +160,39 @@ nastavi.addEventListener('click', () => {
         naziv
     )
 
-
     const broj = uneseniIgraci.length
 
     zvaoAdut.innerHTML = ''
 
     if (broj === 2 || broj === 3) {
-
         uneseniIgraci.forEach((igrac, index) => {
-
             zvaoAdut.innerHTML += `
-            <option value="${index + 1}">
-                ${igrac.toString()}
-            </option>
-        `
-
+                <option value="${index + 1}">
+                    ${igrac.toString()}
+                </option>
+            `
         })
-
     }
 
     if (broj === 4) {
-
         zvaoAdut.innerHTML = `
-        <option value="1">
-            ${uneseniIgraci[0].toString()} i
-            ${uneseniIgraci[1].toString()}
-        </option>
+            <option value="1">
+                ${uneseniIgraci[0].toString()} i
+                ${uneseniIgraci[1].toString()}
+            </option>
 
-        <option value="2">
-            ${uneseniIgraci[2].toString()} i
-            ${uneseniIgraci[3].toString()}
-        </option>
-    `
-
+            <option value="2">
+                ${uneseniIgraci[2].toString()} i
+                ${uneseniIgraci[3].toString()}
+            </option>
+        `
     }
 
     const unosi = []
     const mjesanja = []
 
-
     // Partija za 2 igrača
-
     if (broj === 2) {
-
         partija = new PartijaDvaIgraca(
             1,
             cilj,
@@ -243,14 +201,10 @@ nastavi.addEventListener('click', () => {
             mjesanja,
             uneseniIgraci
         )
-
     }
 
-
     // Partija za 3 igrača
-
     if (broj === 3) {
-
         partija = new PartijaTriIgraca(
             1,
             cilj,
@@ -259,14 +213,10 @@ nastavi.addEventListener('click', () => {
             mjesanja,
             uneseniIgraci
         )
-
     }
 
-
     // Partija za 4 igrača
-
     if (broj === 4) {
-
         partija = new PartijaDvaPara(
             1,
             cilj,
@@ -275,22 +225,14 @@ nastavi.addEventListener('click', () => {
             mjesanja,
             uneseniIgraci
         )
-
     }
 
-
     podaciPartije.style.display = 'none'
-
     unosMjesanja.style.display = 'block'
-
-
     unosiBodova.innerHTML = ''
 
-
     // Unos bodova za 2 igrača
-
     if (uneseniIgraci.length === 2) {
-
         unosiBodova.innerHTML = `
             <h3>${uneseniIgraci[0].toString()}</h3>
 
@@ -299,7 +241,6 @@ nastavi.addEventListener('click', () => {
 
             <label for="zvanjePrvi">Zvanje</label>
             <input type="number" id="zvanjePrvi">
-
 
             <h3>${uneseniIgraci[1].toString()}</h3>
 
@@ -309,14 +250,10 @@ nastavi.addEventListener('click', () => {
             <label for="zvanjeDrugi">Zvanje</label>
             <input type="number" id="zvanjeDrugi">
         `
-
     }
 
-
     // Unos bodova za 3 igrača
-
     if (uneseniIgraci.length === 3) {
-
         unosiBodova.innerHTML = `
             <h3>${uneseniIgraci[0].toString()}</h3>
 
@@ -326,7 +263,6 @@ nastavi.addEventListener('click', () => {
             <label for="zvanjePrvi">Zvanje</label>
             <input type="number" id="zvanjePrvi">
 
-
             <h3>${uneseniIgraci[1].toString()}</h3>
 
             <label for="bodoviDrugi">Bodovi</label>
@@ -334,7 +270,6 @@ nastavi.addEventListener('click', () => {
 
             <label for="zvanjeDrugi">Zvanje</label>
             <input type="number" id="zvanjeDrugi">
-
 
             <h3>${uneseniIgraci[2].toString()}</h3>
 
@@ -344,14 +279,10 @@ nastavi.addEventListener('click', () => {
             <label for="zvanjeTreci">Zvanje</label>
             <input type="number" id="zvanjeTreci">
         `
-
     }
 
-
     // Unos bodova za 4 igrača - dva para
-
     if (uneseniIgraci.length === 4) {
-
         unosiBodova.innerHTML = `
             <h3>
                 ${uneseniIgraci[0].toString()} i
@@ -364,7 +295,6 @@ nastavi.addEventListener('click', () => {
             <label for="zvanjePrvi">Zvanje</label>
             <input type="number" id="zvanjePrvi">
 
-
             <h3>
                 ${uneseniIgraci[2].toString()} i
                 ${uneseniIgraci[3].toString()}
@@ -376,9 +306,7 @@ nastavi.addEventListener('click', () => {
             <label for="zvanjeDrugi">Zvanje</label>
             <input type="number" id="zvanjeDrugi">
         `
-
     }
-
 
     rezultat.innerHTML += `
         <h2>Podaci partije</h2>
@@ -387,14 +315,10 @@ nastavi.addEventListener('click', () => {
 
         <p>Lokacija: ${lokacija.getNaziv()}</p>
     `
-
 })
 
-
 // Miješanje igrača
-
 spremiMjesanje.addEventListener('click', () => {
-
     const bodoviPrviInput = document.getElementById('bodoviPrvi')
     const zvanjePrviInput = document.getElementById('zvanjePrvi')
     const bodoviDrugiInput = document.getElementById('bodoviDrugi')
@@ -433,7 +357,6 @@ spremiMjesanje.addEventListener('click', () => {
     let zvanjeTreci = 0
 
     if (uneseniIgraci.length === 3) {
-
         const bodoviTreciInput =
             document.getElementById('bodoviTreci')
 
@@ -472,12 +395,10 @@ spremiMjesanje.addEventListener('click', () => {
     let mjesanje
 
     // Miješanje za 2 ili 4 igrača
-
     if (
         uneseniIgraci.length === 2 ||
         uneseniIgraci.length === 4
     ) {
-
         mjesanje = new MjesanjeDvaUnosa(
             idMjesanja,
             imaStiglju,
@@ -489,13 +410,10 @@ spremiMjesanje.addEventListener('click', () => {
             zvanjePrvi,
             zvanjeDrugi
         )
-
     }
 
     // Miješanje za 3 igrača
-
     if (uneseniIgraci.length === 3) {
-
         mjesanje = new MjesanjeTriUnosa(
             idMjesanja,
             imaStiglju,
@@ -509,30 +427,20 @@ spremiMjesanje.addEventListener('click', () => {
             bodoviTreci,
             zvanjeTreci
         )
-
     }
 
-
     // Dodavanje miješanja u partiju
-
     partija.getMjesanja().push(mjesanje)
 
-
     // Dohvaćanje ukupnog rezultata
-
     const trenutniRezultat = partija.getRezultat()
 
-
     // Provjera je li partija gotova
-
     if (partija.isIgraGotova()) {
-
         const pobjednikIndex = partija.getPobjednikIndex()
 
         // Kraj partije za 2 igrača
-
         if (uneseniIgraci.length === 2) {
-
             const pobjednik = uneseniIgraci[pobjednikIndex]
 
             trenutniRezultatPrikaz.innerHTML = `
@@ -557,19 +465,14 @@ spremiMjesanje.addEventListener('click', () => {
                 <img src="img/pobjednik.gif" class="pobjednikGif" alt="Pobjednik">
             `
 
-
             unosMjesanja.style.display = 'none'
             novaPartija.style.display = 'block'
 
             return
-
         }
 
-
         // Kraj partije za 3 igrača
-
         if (uneseniIgraci.length === 3) {
-
             const pobjednik = uneseniIgraci[pobjednikIndex]
 
             trenutniRezultatPrikaz.innerHTML = `
@@ -599,27 +502,21 @@ spremiMjesanje.addEventListener('click', () => {
                 <img src="img/pobjednik.gif" class="pobjednikGif" alt="Pobjednik">
             `
 
-
             unosMjesanja.style.display = 'none'
             novaPartija.style.display = 'block'
 
             return
-
         }
 
-
         // Kraj partije za 4 igrača
-
         if (uneseniIgraci.length === 4) {
-
             const prviIgracPara = pobjednikIndex === 0 ? 0 : 2
             const drugiIgracPara = prviIgracPara + 1
 
             const pobjednici = `
-            ${uneseniIgraci[prviIgracPara].toString()} i 
-            ${uneseniIgraci[drugiIgracPara].toString()}
+                ${uneseniIgraci[prviIgracPara].toString()} i
+                ${uneseniIgraci[drugiIgracPara].toString()}
             `
-
 
             trenutniRezultatPrikaz.innerHTML = `
                 <h2>Finalni rezultat</h2>
@@ -645,21 +542,15 @@ spremiMjesanje.addEventListener('click', () => {
                 <img src="img/pobjednik.gif" class="pobjednikGif" alt="Pobjednik">
             `
 
-
             unosMjesanja.style.display = 'none'
             novaPartija.style.display = 'block'
 
             return
-
         }
-
     }
 
-
     // Trenutni rezultat za 2 igrača
-
     if (uneseniIgraci.length === 2) {
-
         trenutniRezultatPrikaz.innerHTML = `
             <h2>Trenutni rezultat</h2>
 
@@ -673,14 +564,10 @@ spremiMjesanje.addEventListener('click', () => {
                 ${trenutniRezultat.getDrugi()}
             </p>
         `
-
     }
 
-
     // Trenutni rezultat za 3 igrača
-
     if (uneseniIgraci.length === 3) {
-
         trenutniRezultatPrikaz.innerHTML = `
             <h2>Trenutni rezultat</h2>
 
@@ -699,14 +586,10 @@ spremiMjesanje.addEventListener('click', () => {
                 ${trenutniRezultat.getTreci()}
             </p>
         `
-
     }
 
-
     // Trenutni rezultat za 4 igrača
-
     if (uneseniIgraci.length === 4) {
-
         trenutniRezultatPrikaz.innerHTML = `
             <h2>Trenutni rezultat</h2>
 
@@ -722,39 +605,25 @@ spremiMjesanje.addEventListener('click', () => {
                 ${trenutniRezultat.getDrugi()}
             </p>
         `
-
     }
 
-
     // Čišćenje polja nakon miješanja
-
     document.getElementById('bodoviPrvi').value = ''
     document.getElementById('zvanjePrvi').value = ''
-
-
     document.getElementById('bodoviDrugi').value = ''
     document.getElementById('zvanjeDrugi').value = ''
 
-
     if (uneseniIgraci.length === 3) {
-
         document.getElementById('bodoviTreci').value = ''
         document.getElementById('zvanjeTreci').value = ''
-
     }
 
-
     // Vraćanje stiglje i belota na Ne
-
     stiglja.value = 'false'
-
     belot.value = 'false'
-
 })
 
-
-document.addEventListener('wheel', (event) => {
-
+document.addEventListener('wheel', () => {
     if (document.activeElement.type === 'number') {
         document.activeElement.blur()
     }

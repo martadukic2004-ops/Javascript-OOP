@@ -153,20 +153,23 @@ Rezultatima se pristupa pomoću metoda:
 Osnovna klasa za zajedničke podatke o jednom miješanju:
 
 * štiglja
-* belot
+* Belot
 * datum unosa
+* igrač ili par koji je zvao adut
+
+Podatak o zovaču dostupan je pomoću metoda `getZvaoAdut()` i `setZvaoAdut()`.
 
 ### `MjesanjeDvaUnosa`
 
-Sadrži bodove i zvanja za dva unosa.
+Sadrži bodove i zvanja za dva igrača ili dva para.
 
-Metoda `getRezultat()` vraća objekt klase `Rezultat` s izračunatim rezultatima.
+Metoda `getRezultat()` određuje je li zovač prošao ili pao te obrađuje štiglju. Rezultat vraća kao objekt klase `Rezultat`.
 
 ### `MjesanjeTriUnosa`
 
 Nasljeđuje klasu `MjesanjeDvaUnosa` i dodaje bodove i zvanje za treći unos.
 
-Metoda `getRezultat()` vraća rezultate sva tri unosa.
+Metoda `getRezultat()` obrađuje rezultate sva tri igrača, uključujući kaput, kaput obrane te prolaz ili pad zovača.
 
 ### `Partija`
 
@@ -180,7 +183,9 @@ Sadrži zajedničke podatke o partiji:
 
 Metoda `getRezultat()` prolazi kroz sva miješanja i izračunava ukupni rezultat partije.
 
-Metoda `isIgraGotova()` provjerava je li partija završena.
+Metoda `isIgraGotova()` provjerava je li partija završena. Belot završava partiju odmah, dok se u ostalim slučajevima provjerava je li vodeći rezultat prešao zadanu granicu.
+
+Metoda `getPobjednikIndex()` određuje pobjednika završene partije. Ako je prijavljen Belot, pobjednik je igrač ili par koji je zvao adut.
 
 ### `PartijaDvaIgraca`
 
@@ -200,11 +205,32 @@ Predstavlja partiju s četiri igrača podijeljena u dva para.
 
 Prvi i drugi igrač čine prvi par, a treći i četvrti igrač drugi par.
 
+## Podržana pravila bodovanja
+
+Aplikacija ne dijeli karte i ne određuje adut ili osvojene štihove. Korisnik unosi već izračunate bodove i zvanja, a aplikacija obrađuje rezultat miješanja i ukupni rezultat partije.
+
+Podržano je:
+
+* određivanje igrača ili para koji je zvao adut
+* prolaz i pad zovača
+* štiglja i dodatnih 90 bodova
+* kaput i kaput obrane kod tri igrača
+* dijeljenje bodova obrane kod pada zovača
+* zvanja, uključujući Belu kao dio običnog unosa zvanja
+* Belot kao automatska pobjeda cijele partije
+* nastavak igre kod izjednačenog vodećeg rezultata
+
+Broj bodova u jednom miješanju nije fiksno postavljen jer se koristi stvarni zbroj unesenih bodova. Time je podržana i igra s manjim brojem karata.
+
 ## Konzolna verzija
 
 Konzolna verzija aplikacije koristi datoteku `podaci.json`.
 
 Program učitava spremljene podatke o partijama, pretvara ih u objekte odgovarajućih klasa, izračunava rezultate i provjerava je li pojedina partija završena.
+
+Svako miješanje u datoteci `podaci.json` sadrži svojstvo `zvaoAdutUnos`.
+
+Za partiju s dva igrača ili dva para dopuštene su vrijednosti `1` i `2`, a za partiju s tri igrača vrijednosti `1`, `2` i `3`.
 
 ### Pokretanje
 
@@ -216,14 +242,15 @@ U glavnoj mapi projekta pokreće se naredba:
 node main.js
 ```
 
-Program zatim ispisuje rezultate partija iz datoteke `podaci.json` u konzolu.
+Program ispisuje rezultate svih partija. Ako je partija završena, ispisuje i pobjednika odnosno pobjednički par.
 
 Primjer:
 
 ```text
-Partija DVA IGRAČA, igra gotova: false, Tomislav Jakopec: 162 | Marijan Zidar: 202
+Partija DVA IGRAČA, igra gotova: false, Tomislav Jakopec: 282 | Marijan Zidar: 172
 Partija TRI IGRAČA, igra gotova: true, Tomislav Jakopec: 60 | Marijan Zidar: 576 | Marija Zimska: 456
-Partija DVA PARA, igra gotova: false, Tomislav Jakopec i Marijan Zidar: 162 | Marija Zimska i Anita Račman: 202
+Pobjednik je Marijan Zidar
+Partija DVA PARA, igra gotova: false, Tomislav Jakopec i Marijan Zidar: 282 | Marija Zimska i Anita Račman: 172
 ```
 
 ## Web aplikacija
@@ -239,13 +266,25 @@ Web aplikacija omogućuje:
 * unos broja bodova do kojeg se igra
 * unos naziva i koordinata lokacije
 * unos bodova i zvanja za svako miješanje
-* označavanje štiglje i belota
+* označavanje štiglje i Belota
+* odabir igrača ili para koji je zvao adut
 * automatsko zbrajanje rezultata svih miješanja
 * prikaz trenutnog rezultata
 * provjeru završetka partije
 * prikaz pobjednika ili pobjedničkog para
+* pokretanje nove partije nakon završetka prethodne
 
-Kada partija završi, prikazuje se finalni rezultat i pobjednik odnosno pobjednički par.
+Web-forma provjerava:
+
+* je li odabran podržani broj igrača
+* jesu li uneseni ime i prezime svakog igrača
+* je li odabran spol svakog igrača
+* je li unesena ispravna granica partije
+* je li unesen naziv lokacije
+* jesu li uneseni svi bodovi i zvanja
+* jesu li bodovi i zvanja nenegativni
+
+Kada partija završi, prikazuje se finalni rezultat i pobjednik odnosno pobjednički par. Obrazac za unos miješanja tada se skriva, a gumb **Nova partija** ponovno pokreće aplikaciju.
 
 ### Pokretanje web aplikacije
 
@@ -255,11 +294,29 @@ Ulazna datoteka web aplikacije nalazi se u:
 web/index.html
 ```
 
-Web aplikacija koristi JavaScript module i klase iz direktorija `Model`, zbog čega se treba pokrenuti preko lokalnog web servera, primjerice pomoću Live Servera u Visual Studio Codeu.
+Web aplikacija koristi JavaScript module i klase iz direktorija `Model`, zbog čega se treba pokrenuti preko lokalnog web servera.
 
-Web verzija ne koristi `main.js` ni `podaci.json` za unos nove partije. Podaci se unose kroz HTML sučelje, dok se za obradu koriste iste klase iz direktorija `Model`.
+Može se koristiti Live Server u Visual Studio Codeu ili naredba iz glavne mape projekta:
 
-## Povezanost konzolne i web verzije
+```bash
+npx serve .
+```
+
+Na Windowsu, ako PowerShell blokira `npx.ps1`, može se koristiti:
+
+```powershell
+npx.cmd serve .
+```
+
+Nakon pokretanja aplikacija je dostupna na adresi:
+
+```text
+http://localhost:3000/web/
+```
+
+Web-verzija ne koristi `main.js` ni `podaci.json` za unos nove partije. Podaci se unose kroz HTML sučelje, dok se za obradu koriste iste klase iz direktorija `Model`.
+
+## Povezanost konzolne i web-verzije
 
 Obje verzije aplikacije koriste isti objektno orijentirani model.
 
@@ -272,8 +329,7 @@ podaci.json
      ↓
    Model
 
-
-Web verzija:
+Web-verzija:
 
 index.html
      ↓
@@ -282,4 +338,4 @@ index.html
    Model
 ```
 
-Na taj način logika aplikacije definirana u klasama može se koristiti u različitim okruženjima bez potrebe za stvaranjem zasebnog modela za web aplikaciju.
+Na taj način logika aplikacije definirana u klasama može se koristiti u različitim okruženjima bez potrebe za stvaranjem zasebnog modela za web-aplikaciju.
