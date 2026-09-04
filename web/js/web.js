@@ -87,6 +87,13 @@ pokreni.addEventListener('click', () => {
 
     const broj = Number(brojIgraca.value)
 
+    if (broj !== 2 && broj !== 3 && broj !== 4) {
+        rezultat.innerHTML = `
+        <p>Odaberi broj igrača.</p>
+        `
+        return
+    }
+
     uneseniIgraci = []
 
     for (let i = 1; i <= broj; i++) {
@@ -95,6 +102,27 @@ pokreni.addEventListener('click', () => {
         const prezime = document.getElementById('prezime' + i).value
         const urlSlika = document.getElementById('urlSlika' + i).value
         const spol = document.getElementById('spol' + i).value
+
+        if (ime.trim() === '') {
+            rezultat.innerHTML = `
+        <p>Unesi ime igrača ${i}.</p>
+    `
+            return
+        }
+
+        if (prezime.trim() === '') {
+            rezultat.innerHTML = `
+        <p>Unesi prezime igrača ${i}.</p>
+    `
+            return
+        }
+
+        if (spol === '') {
+            rezultat.innerHTML = `
+        <p>Odaberi spol igrača ${i}.</p>
+    `
+            return
+        }
 
         const igrac = new Igrac(
             i,
@@ -136,9 +164,26 @@ pokreni.addEventListener('click', () => {
 nastavi.addEventListener('click', () => {
 
     const naziv = nazivLokacije.value
+    const cilj = Number(doKolikoSeIgra.value)
     const longitudeBroj = Number(longitude.value)
     const latitudeBroj = Number(latitude.value)
 
+    if (
+        doKolikoSeIgra.value === '' ||
+        cilj <= 0
+    ) {
+        rezultat.innerHTML = `
+            <p>Unesi ispravan broj bodova do kojeg se igra.</p>
+        `
+        return
+    }
+
+    if (naziv === '') {
+        rezultat.innerHTML = `
+            <p>Unesi naziv lokacije.</p>
+        `
+        return
+    }
 
     lokacija = new Lokacija(
         1,
@@ -182,7 +227,6 @@ nastavi.addEventListener('click', () => {
 
     }
 
-    const cilj = Number(doKolikoSeIgra.value)
     const unosi = []
     const mjesanja = []
 
@@ -351,18 +395,75 @@ nastavi.addEventListener('click', () => {
 
 spremiMjesanje.addEventListener('click', () => {
 
-    const bodoviPrvi = Number(
-        document.getElementById('bodoviPrvi').value
-    )
-    const zvanjePrvi = Number(
-        document.getElementById('zvanjePrvi').value
-    )
-    const bodoviDrugi = Number(
-        document.getElementById('bodoviDrugi').value
-    )
-    const zvanjeDrugi = Number(
-        document.getElementById('zvanjeDrugi').value
-    )
+    const bodoviPrviInput = document.getElementById('bodoviPrvi')
+    const zvanjePrviInput = document.getElementById('zvanjePrvi')
+    const bodoviDrugiInput = document.getElementById('bodoviDrugi')
+    const zvanjeDrugiInput = document.getElementById('zvanjeDrugi')
+
+    if (
+        bodoviPrviInput.value === '' ||
+        zvanjePrviInput.value === '' ||
+        bodoviDrugiInput.value === '' ||
+        zvanjeDrugiInput.value === ''
+    ) {
+        trenutniRezultatPrikaz.innerHTML = `
+            <p>Unesi sve bodove i zvanja.</p>
+        `
+        return
+    }
+
+    const bodoviPrvi = Number(bodoviPrviInput.value)
+    const zvanjePrvi = Number(zvanjePrviInput.value)
+    const bodoviDrugi = Number(bodoviDrugiInput.value)
+    const zvanjeDrugi = Number(zvanjeDrugiInput.value)
+
+    if (
+        bodoviPrvi < 0 ||
+        zvanjePrvi < 0 ||
+        bodoviDrugi < 0 ||
+        zvanjeDrugi < 0
+    ) {
+        trenutniRezultatPrikaz.innerHTML = `
+            <p>Bodovi i zvanja ne mogu biti negativni.</p>
+        `
+        return
+    }
+
+    let bodoviTreci = 0
+    let zvanjeTreci = 0
+
+    if (uneseniIgraci.length === 3) {
+
+        const bodoviTreciInput =
+            document.getElementById('bodoviTreci')
+
+        const zvanjeTreciInput =
+            document.getElementById('zvanjeTreci')
+
+        if (
+            bodoviTreciInput.value === '' ||
+            zvanjeTreciInput.value === ''
+        ) {
+            trenutniRezultatPrikaz.innerHTML = `
+                <p>Unesi sve bodove i zvanja.</p>
+            `
+            return
+        }
+
+        bodoviTreci = Number(bodoviTreciInput.value)
+        zvanjeTreci = Number(zvanjeTreciInput.value)
+
+        if (
+            bodoviTreci < 0 ||
+            zvanjeTreci < 0
+        ) {
+            trenutniRezultatPrikaz.innerHTML = `
+                <p>Bodovi i zvanja ne mogu biti negativni.</p>
+            `
+            return
+        }
+    }
+
     const imaStiglju = stiglja.value === 'true'
     const imaBelot = belot.value === 'true'
     const zvaoJe = Number(zvaoAdut.value)
@@ -394,15 +495,6 @@ spremiMjesanje.addEventListener('click', () => {
     // Miješanje za 3 igrača
 
     if (uneseniIgraci.length === 3) {
-
-        const bodoviTreci = Number(
-            document.getElementById('bodoviTreci').value
-        )
-
-        const zvanjeTreci = Number(
-            document.getElementById('zvanjeTreci').value
-        )
-
 
         mjesanje = new MjesanjeTriUnosa(
             idMjesanja,
