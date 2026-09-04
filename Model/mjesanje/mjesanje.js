@@ -4,9 +4,9 @@ export class Mjesanje extends Entitet {
     #stiglja
     #belot
     #datumUnosa
-    #zvaoAdut = Number(zvaoAdut)
+    #zvaoAdut
 
-    constructor(id, stiglja, belot, datumUnosa) {
+    constructor(id, stiglja, belot, datumUnosa, zvaoAdut) {
         super(id)
         this.#stiglja = stiglja
         this.#belot = belot
